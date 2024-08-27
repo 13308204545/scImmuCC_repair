@@ -23,9 +23,9 @@ seurat_Heatmap <- function(count,genematrix,ssGSEA_result,filename){
   seurat.data
   seurat.data[["percent.mt"]] <- PercentageFeatureSet(seurat.data, pattern = "^MT-")
   HB.genes_total <- c("HBA1","HBA2","HBB","HBD","HBE1","HBG1","HBG2","HBM","HBQ1","HBZ")
-  HB_m <- match(HB.genes_total,rownames(seurat.data@assays$RNA))
+  HB_m <- match(HB.genes_total,rownames(seurat.data@assays$SCT))
 
-  HB.genes <- rownames(seurat.data@assays$RNA)[HB_m]
+  HB.genes <- rownames(seurat.data@assays$SCT)[HB_m]
   HB.genes <- HB.genes[!is.na(HB.genes)]
   seurat.data[["percent.HB"]]<-PercentageFeatureSet(seurat.data,features=HB.genes)
 
@@ -36,7 +36,7 @@ seurat_Heatmap <- function(count,genematrix,ssGSEA_result,filename){
 
   #Perform linear dimensional reductionPerform linear dimensional reduction
   #counts <- seurat.data[["RNA"]]@counts
-  counts <- seurat.data[["RNA"]]$counts
+  counts <- seurat.data[["SCT"]]@counts
   cells <- length(counts[2,])
   if(cells>50){
     seurat.data <- RunPCA(seurat.data, features = VariableFeatures(object = seurat.data))
