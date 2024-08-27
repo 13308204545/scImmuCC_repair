@@ -2,6 +2,7 @@
 
 export(scImmuCC_Layered)
 export(seurat_Heatmap)
+export(scImmuCC_main)
 import(GSVA)
 import(Matrix)
 import(Seurat)
